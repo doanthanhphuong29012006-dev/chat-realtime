@@ -13,7 +13,8 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background-color: #f0f2f5; /* Nền tổng thể màu xám nhạt */
+    background-color: #f0f2f5;
+    /* Nền tổng thể màu xám nhạt */
 }
 
 /* ==========================================
@@ -26,14 +27,15 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     z-index: 10;
 }
 
 .chat-header .logo h1 {
     font-size: 1.5rem;
     margin: 0;
-    color: #0084ff; /* Màu xanh chủ đạo */
+    color: #0084ff;
+    /* Màu xanh chủ đạo */
     font-weight: 700;
 }
 
@@ -122,7 +124,8 @@ body {
 }
 
 .contact-item.active {
-    background: #e6f2ff; /* Highlight contact đang chọn */
+    background: #e6f2ff;
+    /* Highlight contact đang chọn */
 }
 
 .contact-info {
@@ -169,7 +172,9 @@ body {
 }
 
 /* Khắc phục class của Bootstrap chiếm chiều cao */
-.main .row, .main .col-12, .main .chat {
+.main .row,
+.main .col-12,
+.main .chat {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -191,7 +196,8 @@ body {
 }
 
 /* Styles cho bong bóng tin nhắn */
-.inner-incoming, .inner-outgoing {
+.inner-incoming,
+.inner-outgoing {
     max-width: 65%;
     display: flex;
     flex-direction: column;
@@ -213,7 +219,8 @@ body {
 }
 
 .inner-outgoing .inner-name {
-    display: none; /* Thường không hiện tên của chính mình */
+    display: none;
+    /* Thường không hiện tên của chính mình */
 }
 
 .inner-content {
@@ -222,19 +229,21 @@ body {
     font-size: 0.95rem;
     line-height: 1.4;
     word-wrap: break-word;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .inner-incoming .inner-content {
     background: #ffffff;
     color: #1c1e21;
-    border-bottom-left-radius: 4px; /* Hiệu ứng đuôi tin nhắn */
+    border-bottom-left-radius: 4px;
+    /* Hiệu ứng đuôi tin nhắn */
 }
 
 .inner-outgoing .inner-content {
     background: #0084ff;
     color: #ffffff;
-    border-bottom-right-radius: 4px; /* Hiệu ứng đuôi tin nhắn */
+    border-bottom-right-radius: 4px;
+    /* Hiệu ứng đuôi tin nhắn */
 }
 
 /* ==========================================
@@ -296,7 +305,7 @@ body {
 /* Nền trang đăng nhập */
 .login-background {
     min-height: 100vh;
-    background-color: #f0f2f5; 
+    background-color: #f0f2f5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -328,7 +337,7 @@ body {
 }
 
 .input-primary:focus {
-    border-color: #0084ff; 
+    border-color: #0084ff;
     box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.15);
     outline: none;
     background-color: #ffffff;
@@ -359,13 +368,13 @@ body {
     font-weight: 600;
     border: 1px solid #0084ff;
     transition: all 0.2s ease;
-    text-decoration: none; 
+    text-decoration: none;
     display: inline-block;
     text-align: center;
 }
 
 .btn-register-primary:hover {
-    background-color: #f0f7ff; 
+    background-color: #f0f7ff;
     color: #0073e6;
     border-color: #0073e6;
 }
@@ -385,7 +394,8 @@ body {
     font-weight: 500;
     z-index: 9999;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Hiệu ứng trượt nảy nhẹ */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Hiệu ứng trượt nảy nhẹ */
     opacity: 1;
     transform: translateX(0);
     min-width: 250px;
@@ -393,16 +403,22 @@ body {
 
 /* Thông báo thành công: Xanh lá */
 .alert-success {
-    background-color: #edf7ed; /* Nền xanh nhạt */
-    color: #1e4620; /* Chữ xanh đậm */
-    border-left: 5px solid #4caf50; /* Viền nhấn bên trái */
+    background-color: #edf7ed;
+    /* Nền xanh nhạt */
+    color: #1e4620;
+    /* Chữ xanh đậm */
+    border-left: 5px solid #4caf50;
+    /* Viền nhấn bên trái */
 }
 
 /* Thông báo lỗi/thất bại: Đỏ */
 .alert-danger {
-    background-color: #fdeded; /* Nền đỏ nhạt */
-    color: #5f2120; /* Chữ đỏ đậm */
-    border-left: 5px solid #ef5350; /* Viền nhấn bên trái */
+    background-color: #fdeded;
+    /* Nền đỏ nhạt */
+    color: #5f2120;
+    /* Chữ đỏ đậm */
+    border-left: 5px solid #ef5350;
+    /* Viền nhấn bên trái */
 }
 
 /* Nút tắt alert (dấu x) */
@@ -430,6 +446,35 @@ body {
 */
 .alert.alert-hidden {
     opacity: 0;
-    transform: translateX(120%); /* Trượt ra ngoài màn hình bên phải */
+    transform: translateX(120%);
     pointer-events: none;
 }
+
+/* Emoji Icon */
+.tooltip.shown {
+    opacity: 1 !important;
+}
+
+.tooltip:not(.shown) {
+    display: none;
+}
+
+/* Styling cho nút bật Emoji */
+.button-icon {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #65676b;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+/* Hiệu ứng khi di chuột vào */
+.button-icon:hover {
+    color: #0084ff;
+    background-color: #e4e6eb;
+    transform: scale(1.05);
+}
+/* End Emoji Icon */
