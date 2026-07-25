@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const path = require('path');
 const app = express();
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
@@ -40,10 +41,10 @@ app.use(flash());
 const route = require('./routes/index.route.js');
 const User = require('./models/user.model.js');
 
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 route(app);
 
