@@ -1,0 +1,66 @@
+extends ../../layouts/auth.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    
+    .login-background
+        .container.my-5
+            .row.justify-content-center
+                .col-md-6.col-lg-5
+                    .login-card
+                        .text-center.mb-4
+                            h1.title-primary Tạo tài khoản
+
+                        form(
+                            action="/auth/register"
+                            method="POST"
+                        )
+                            .mb-3
+                                label.form-label.fw-bold(for="fullName") Họ và tên
+                                input.form-control.input-primary(
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    placeholder="Nhập họ và tên của bạn..."
+                                    required
+                                )
+
+                            .mb-3
+                                label.form-label.fw-bold(for="email") Email
+                                input.form-control.input-primary(
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Nhập email của bạn..."
+                                    required
+                                )
+
+                            .mb-3
+                                label.form-label.fw-bold(for="password") Mật khẩu
+                                input.form-control.input-primary(
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="••••••••"
+                                    required
+                                )
+
+                            .mb-3
+                                label.form-label.fw-bold(for="confirmPassword") Xác nhận mật khẩu
+                                input.form-control.input-primary(
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="••••••••"
+                                    required
+                                )
+
+                            button.btn.btn-login-primary.w-100.mt-4(
+                                type="submit"
+                            ) Đăng ký ngay
+
+                            a.btn.btn-register-primary.w-100.mt-3(
+                                href="/auth/login"
+                            ) Đã có tài khoản? Đăng nhập

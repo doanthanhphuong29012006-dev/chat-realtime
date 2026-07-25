@@ -1,0 +1,46 @@
+extends ../../layouts/auth.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    
+    .login-background
+        .container.my-5
+            .row.justify-content-center
+                .col-md-6.col-lg-4
+                    .login-card
+                        .text-center.mb-4
+                            h1.title-primary Đăng nhập
+
+                        form(
+                            action="/auth/login"
+                            method="POST"
+                        )
+                            .mb-3
+                                label.form-label.fw-bold(for="email") Email
+                                input.form-control.input-primary(
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Nhập email của bạn..."
+                                    required
+                                )
+
+                            .mb-3
+                                label.form-label.fw-bold(for="password") Mật khẩu
+                                input.form-control.input-primary(
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="••••••••"
+                                    required
+                                )
+
+                            button.btn.btn-login-primary.w-100.mt-4(
+                                type="submit"
+                            ) Đăng nhập ngay
+
+                            a.btn.btn-register-primary.w-100.mt-3(
+                                href="/auth/register"
+                            ) Tạo tài khoản mới

@@ -1,0 +1,435 @@
+/* ==========================================
+   1. RESET & BASE STYLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #f0f2f5; /* Nền tổng thể màu xám nhạt */
+}
+
+/* ==========================================
+   2. HEADER
+   ========================================== */
+.chat-header {
+    height: 60px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.chat-header .logo h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #0084ff; /* Màu xanh chủ đạo */
+    font-weight: 700;
+}
+
+.chat-header .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.chat-header .username {
+    font-weight: 500;
+}
+
+.chat-header .btn-logout {
+    padding: 6px 12px;
+    border: 1px solid #dc3545;
+    background: transparent;
+    color: #dc3545;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.chat-header .btn-logout:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* ==========================================
+   3. MAIN LAYOUT (BODY)
+   ========================================== */
+.body {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 60px);
+}
+
+/* ==========================================
+   4. SIDEBAR
+   ========================================== */
+.chat-sidebar {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.search-container {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background: #f0f2f5;
+    font-size: 0.9rem;
+}
+
+.contact-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.contact-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f9f9f9;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.contact-item:hover {
+    background: #f4f5f7;
+}
+
+.contact-item.active {
+    background: #e6f2ff; /* Highlight contact đang chọn */
+}
+
+.contact-info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.contact-name {
+    font-size: 1rem;
+    margin: 0 0 4px 0;
+    color: #1c1e21;
+    font-weight: 600;
+}
+
+.last-message {
+    font-size: 0.85rem;
+    color: #65676b;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.contact-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.contact-meta .time {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+/* ==========================================
+   5. CHAT WINDOW (MAIN)
+   ========================================== */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #f0f2f5;
+}
+
+/* Khắc phục class của Bootstrap chiếm chiều cao */
+.main .row, .main .col-12, .main .chat {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Khu vực hiển thị tin nhắn */
+.inner-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Styles cho bong bóng tin nhắn */
+.inner-incoming, .inner-outgoing {
+    max-width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-incoming {
+    align-self: flex-start;
+}
+
+.inner-outgoing {
+    align-self: flex-end;
+}
+
+.inner-name {
+    font-size: 0.75rem;
+    color: #65676b;
+    margin-bottom: 4px;
+    margin-left: 12px;
+}
+
+.inner-outgoing .inner-name {
+    display: none; /* Thường không hiện tên của chính mình */
+}
+
+.inner-content {
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.inner-incoming .inner-content {
+    background: #ffffff;
+    color: #1c1e21;
+    border-bottom-left-radius: 4px; /* Hiệu ứng đuôi tin nhắn */
+}
+
+.inner-outgoing .inner-content {
+    background: #0084ff;
+    color: #ffffff;
+    border-bottom-right-radius: 4px; /* Hiệu ứng đuôi tin nhắn */
+}
+
+/* ==========================================
+   6. CHAT INPUT FOOTER
+   ========================================== */
+.inner-foot {
+    background: #ffffff;
+    padding: 15px 20px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.inner-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.inner-form input {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    background: #f0f2f5;
+    border-radius: 24px;
+    outline: none;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+.inner-form input:focus {
+    background: #e4e6eb;
+}
+
+.inner-form button {
+    background: #0084ff;
+    color: white;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.inner-form button:hover {
+    background: #0073e6;
+}
+
+.inner-form button i {
+    font-size: 1.1rem;
+}
+
+/* ==========================================
+   7. TRANG ĐĂNG NHẬP / ĐĂNG KÝ (AUTH)
+   ========================================== */
+
+/* Nền trang đăng nhập */
+.login-background {
+    min-height: 100vh;
+    background-color: #f0f2f5; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card chứa form */
+.login-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Tiêu đề */
+.title-primary {
+    color: #1c1e21;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Input form */
+.input-primary {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #dcdfe6;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.input-primary:focus {
+    border-color: #0084ff; 
+    box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.15);
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Nút Đăng nhập ngay (Nút chính) */
+.btn-login-primary {
+    background-color: #0084ff;
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-login-primary:hover {
+    background-color: #0073e6;
+    color: #ffffff;
+}
+
+/* Nút Tạo tài khoản mới (Nút phụ - viền xanh) */
+.btn-register-primary {
+    background-color: transparent;
+    color: #0084ff;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid #0084ff;
+    transition: all 0.2s ease;
+    text-decoration: none; 
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-register-primary:hover {
+    background-color: #f0f7ff; 
+    color: #0073e6;
+    border-color: #0073e6;
+}
+
+/* ==========================================
+   8. THÔNG BÁO (FLASH ALERTS)
+   ========================================== */
+
+/* Khung cơ bản của alert */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 50px 16px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Hiệu ứng trượt nảy nhẹ */
+    opacity: 1;
+    transform: translateX(0);
+    min-width: 250px;
+}
+
+/* Thông báo thành công: Xanh lá */
+.alert-success {
+    background-color: #edf7ed; /* Nền xanh nhạt */
+    color: #1e4620; /* Chữ xanh đậm */
+    border-left: 5px solid #4caf50; /* Viền nhấn bên trái */
+}
+
+/* Thông báo lỗi/thất bại: Đỏ */
+.alert-danger {
+    background-color: #fdeded; /* Nền đỏ nhạt */
+    color: #5f2120; /* Chữ đỏ đậm */
+    border-left: 5px solid #ef5350; /* Viền nhấn bên trái */
+}
+
+/* Nút tắt alert (dấu x) */
+.alert [close-alert] {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    padding: 5px;
+    line-height: 1;
+}
+
+.alert [close-alert]:hover {
+    opacity: 1;
+}
+
+/* 
+   Trạng thái ẩn alert do JS xử lý
+   (Hoạt động với class alert-hidden được add vào từ file script.js) 
+*/
+.alert.alert-hidden {
+    opacity: 0;
+    transform: translateX(120%); /* Trượt ra ngoài màn hình bên phải */
+    pointer-events: none;
+}
