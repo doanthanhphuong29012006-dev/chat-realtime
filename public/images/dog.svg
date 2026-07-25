@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Nền hình tròn (Màu xanh nhạt để hợp với giao diện app chat) -->
+  <circle cx="50" cy="50" r="48" fill="#e6f2ff" />
+
+  <!-- Tai trái (Rủ xuống) -->
+  <path d="M 25 35 Q 10 50 15 70 Q 25 75 30 50 Z" fill="#c49a6c" />
+  
+  <!-- Tai phải (Vểnh lên một chút cho ngố) -->
+  <path d="M 75 35 Q 95 40 85 70 Q 75 75 70 50 Z" fill="#c49a6c" />
+
+  <!-- Khuôn mặt -->
+  <ellipse cx="50" cy="55" rx="35" ry="30" fill="#f0c89a" />
+
+  <!-- Mũi to -->
+  <ellipse cx="50" cy="62" rx="12" ry="8" fill="#333" />
+
+  <!-- Lưỡi thè ra -->
+  <path d="M 45 68 Q 50 88 55 68 Z" fill="#ff6b6b" />
+
+  <!-- Mắt trái (To, nhìn xuống) -->
+  <circle cx="35" cy="42" r="11" fill="white" />
+  <circle cx="35" cy="45" r="4" fill="black" />
+
+  <!-- Mắt phải (Nhỏ hơn, nhìn lệch lên trên) -->
+  <circle cx="65" cy="40" r="8" fill="white" />
+  <circle cx="67" cy="38" r="3" fill="black" />
+
+  <!-- Lông mày -->
+  <path d="M 25 28 Q 35 22 42 30" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 75 28 Q 65 22 58 26" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
