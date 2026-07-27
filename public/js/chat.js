@@ -1,5 +1,14 @@
 import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 
+// File Upload With Preview
+import { FileUploadWithPreview } from 'https://esm.sh/file-upload-with-preview';
+
+const upload = new FileUploadWithPreview('upload-images', {
+    multiple: true,
+    maxFileCount: 6
+});
+// End File Upload With Preview
+
 // CLIENT_SEND_MESSAGE
 var timeOut;
 
@@ -8,9 +17,24 @@ if (formSendData) {
     formSendData.addEventListener("submit", (e) => {
         e.preventDefault();
         const content = e.target.elements.content.value;
-        if (content) {
-            socket.emit("CLIENT_SEND_MESSAGE", content);
+
+        const images = upload.cachedFileArray;
+
+        if (content || images.length > 0) {
+            socket.emit("CLIENT_SEND_MESSAGE", {
+                content: content,
+                images: images
+            });
+
             e.target.elements.content.value = "";
+
+            upload.resetPreviewPanel();
+
+            const previewImages = document.querySelector(".inner-preview-images");
+            if (previewImages) {
+                previewImages.classList.remove("active");
+            }
+
             socket.emit("CLIENT_SEND_TYPING", "hidden");
             clearTimeout(timeOut);
         }
@@ -26,6 +50,8 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
 
     const div = document.createElement("div");
     let htmlFullname = "";
+    let htmlContent = "";
+    let htmlImages = "";
 
     if (myId === data.userId) {
         div.classList.add("inner-outgoing");
@@ -33,10 +59,27 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
         htmlFullname=`<div class="inner-name">${data.fullName}</div>`;
         div.classList.add("inner-incoming");
     }
+
+    if (data.content) {
+        htmlContent = `
+            <div class="inner-content">${data.content}</div>
+        `;
+    }
+
+    if (data.images && data.images.length > 0) {
+        htmlImages = `<div class="inner-images">`;
+
+        for (const image of data.images) {
+            htmlImages += `<img src=${image}>`;
+        }
+
+        htmlImages += `</div>`;
+    }
     
     div.innerHTML = `
         ${htmlFullname}
-        <div class="inner-content">${data.content}</div>
+        ${htmlContent}
+        ${htmlImages}
     `;
 
     body.insertBefore(div, boxTyping);
@@ -65,7 +108,7 @@ const showTyping = () => {
 // End Show Typing
 
 // Show Icon Chat
-const buttonIcon = document.querySelector('.button-icon');
+const buttonIcon = document.querySelector('.button-smile');
 if (buttonIcon) {
     const tooltip = document.querySelector('.tooltip');
     Popper.createPopper(buttonIcon, tooltip, {
@@ -84,6 +127,36 @@ if (buttonIcon) {
         tooltip.classList.toggle('shown');
     }
 }
+
+// Show Image Upload
+const buttonImage = document.querySelector(".button-image");
+const previewImages = document.querySelector(".inner-preview-images");
+
+if (buttonImage) {
+    buttonImage.addEventListener("click", () => {
+        const hiddenInput = document.querySelector(".custom-file-container input[type='file']");
+        if (hiddenInput) {
+            hiddenInput.click();
+        }
+    });
+}
+
+if (previewImages) {
+    previewImages.addEventListener("change", () => {
+        if (upload.cachedFileArray.length > 0) {
+            previewImages.classList.add("active");
+        }
+    });
+
+    previewImages.addEventListener("click", () => {
+        setTimeout(() => {
+            if (upload.cachedFileArray.length === 0) {
+                previewImages.classList.remove("active");
+            }
+        }, 200);
+    });
+}
+// End Show Image Upload
 
 // Insert Icon To Input
 const emojiPicker = document.querySelector("emoji-picker");

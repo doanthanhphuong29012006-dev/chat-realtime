@@ -530,3 +530,78 @@ body {
 }
 
 /* End box-typing */
+
+/* Image */
+.inner-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+/* Styling cho từng bức ảnh */
+.inner-images img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+/* End Image */
+
+/* ==========================================
+   TÙY CHỈNH UPLOAD ẢNH (FILE UPLOAD WITH PREVIEW)
+   ========================================== */
+.inner-foot {
+    position: relative; 
+}
+
+/* 1. Ẩn chữ "Upload / x" và thanh "Choose file..." mặc định bằng mọi giá */
+.custom-file-container label,
+.custom-file-container__info,
+.custom-file-container__custom-file {
+    display: none !important;
+}
+
+.custom-file-container {
+    margin: 0 !important;
+}
+
+/* 2. Sửa lỗi khung bị bóp nghẹt bằng cách thêm width và padding */
+.inner-preview-images {
+    position: absolute;
+    bottom: 100%;
+    left: 15px;
+    margin-bottom: 5px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+    display: none; 
+    padding: 10px; 
+    width: 300px;
+    max-width: 60vw;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.inner-preview-images.active {
+    display: block;
+}
+
+/* 3. Ép ảnh xem trước thành hình vuông (tránh bị bẹp) */
+.custom-file-container__image-preview {
+    height: 80px !important; 
+    width: 80px !important;
+    margin: 0 !important;
+    border-radius: 8px;
+    border: none !important;
+    background-size: cover !important;
+}
+
+/* 4. Xử lý riêng khi người dùng chọn NHIỀU ẢNH cùng lúc */
+.custom-file-container__image-multi-preview {
+    height: 80px !important;
+    width: 80px !important;
+    margin: 0 8px 8px 0 !important;
+    border-radius: 8px !important;
+}

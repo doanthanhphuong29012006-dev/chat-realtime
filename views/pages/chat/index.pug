@@ -13,8 +13,15 @@ block main
                         div(class=(user.id == chat.user_id ? "inner-outgoing" : "inner-incoming"))
                             if (user.id != chat.user_id)
                                 .inner-name #{chat.userInfo.fullName}
-                            .inner-content
+                            
+                            if (chat.content)
+                                .inner-content
                                     | #{chat.content}
+
+                            if (chat.images && chat.images.length > 0)
+                                .inner-images
+                                    each image in chat.images 
+                                        img(src=image)
 
                     div(class="inner-list-typing")
 
@@ -29,10 +36,19 @@ block main
                             name="content"
                         )
 
-                        span(class="button-icon")
+                        span(class="button-icon button-image")
+                            i.fa-regular.fa-image
+
+                        span(class="button-icon button-smile")
                             i.fa-regular.fa-face-smile
 
                         button
                             i.fa-solid.fa-paper-plane
                         div(class="tooltip" role="tooltip")
                             emoji-picker
+
+                    .inner-preview-images
+                        div(
+                            class="custom-file-container" 
+                            data-upload-id="upload-images"
+                        )
