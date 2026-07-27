@@ -605,3 +605,165 @@ body {
     margin: 0 8px 8px 0 !important;
     border-radius: 8px !important;
 }
+
+/* ==========================================
+   GIAO DIỆN QUẢN LÝ NGƯỜI DÙNG (/users)
+   ========================================== */
+
+/* Phần Header */
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e5e5e5;
+    padding-bottom: 15px;
+}
+
+.title-page {
+    color: #1c1e21;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Nút bấm Custom cơ bản */
+.btn-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+/* Nút Sang trang Chat */
+.btn-chat {
+    background-color: #28a745; /* Màu xanh lá nổi bật */
+    color: white;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+
+.btn-chat:hover {
+    background-color: #218838;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Thanh điều hướng các Tab */
+.users-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-nav {
+    background-color: transparent;
+    color: #0084ff;
+    border-color: #0084ff;
+}
+
+.btn-nav:hover,
+.btn-nav.active {
+    background-color: #0084ff;
+    color: white;
+}
+
+/* Card chứa thông tin User */
+.user-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+}
+
+.user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover; /* Thay thế inline CSS */
+    margin-right: 15px;
+    border: 2px solid #e4e6eb;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1c1e21;
+    margin-bottom: 4px;
+}
+
+.user-status {
+    font-size: 0.85rem;
+    color: #65676b;
+    margin: 0;
+}
+
+/* Phần Nút Hành Động trong Card */
+.user-actions {
+    background-color: #ffffff;
+    border-top: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.btn-action {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+.btn-add {
+    background-color: #e6f2ff;
+    color: #0084ff;
+}
+
+.btn-add:hover {
+    background-color: #0084ff;
+    color: white;
+}
+
+.btn-message {
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+
+.btn-message:hover {
+    background-color: #e4e6eb;
+}
+
+.btn-cancel {
+    background-color: #fdeded;
+    color: #dc3545;
+}
+
+.btn-cancel:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* ==========================================
+   TÙY CHỈNH LOGO HEADER
+   ========================================== */
+.header-logo {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.logo a:hover .header-logo {
+    transform: scale(1.05);
+}

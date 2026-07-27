@@ -1,0 +1,77 @@
+extends ../../layouts/default-no-sidebar.pug
+
+block main
+    .container.my-4
+        .header-actions.mb-4
+            h2.title-page Quản lý kết bạn
+            a(
+                class="btn-custom btn-chat"
+                href="/chat"
+            ) 
+                i.fa-brands.fa-rocketchat.me-2
+                | Vào phòng Chat
+
+        .users-nav.mb-4
+            a(
+                class="btn-custom btn-nav active"
+                href="/users/suggestions"
+            ) <i class="fa-solid fa-users me-2"></i> Danh sách người dùng
+
+            a(
+                class="btn-custom btn-nav"
+                href="/users/friends"
+            ) <i class="fa-solid fa-user-group me-2"></i> Danh sách bạn bè
+
+            a(
+                class="btn-custom btn-nav"
+                href="/users/requests"
+            ) <i class="fa-solid fa-user-clock me-2"></i> Lời mời đã gửi
+
+            a(
+                class="btn-custom btn-nav"
+                href="/users/accept"
+            ) <i class="fa-solid fa-user-check me-2"></i> Lời mời kết bạn
+
+        //- Vùng hiển thị danh sách người dùng
+        .row
+            //- each user in users
+            
+            //- Khối HTML của 1 User
+            .col-md-6.col-lg-4.mb-4
+                .user-card.card
+                    .card-body.d-flex.align-items-center
+                        //- Avatar không còn style inline
+                        img.user-avatar(
+                            src="https://via.placeholder.com/60" 
+                            alt="Avatar"
+                        )
+                        
+                        .user-info
+                            h5.user-name Nguyễn Văn A 
+                            p.user-status Hoạt động 5 phút trước
+
+                    .user-actions.card-footer
+                        button.btn-custom.btn-action.btn-add
+                            i.fa-solid.fa-user-plus.me-1
+                            | Kết bạn
+                        
+                        button.btn-custom.btn-action.btn-message
+                            i.fa-regular.fa-message.me-1
+                            | Nhắn tin
+            
+            //- Demo 1 card nữa
+            .col-md-6.col-lg-4.mb-4
+                .user-card.card
+                    .card-body.d-flex.align-items-center
+                        img.user-avatar(
+                            src="https://via.placeholder.com/60" 
+                            alt="Avatar"
+                        )
+                        .user-info
+                            h5.user-name Trần Thị B 
+                            p.user-status Đang online
+
+                    .user-actions.card-footer
+                        button.btn-custom.btn-action.btn-cancel 
+                            i.fa-solid.fa-xmark.me-1
+                            | Hủy lời mời
