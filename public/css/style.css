@@ -767,3 +767,123 @@ body {
 .logo a:hover .header-logo {
     transform: scale(1.05);
 }
+
+/* ==========================================
+   10. DANH SÁCH NGƯỜI DÙNG & KẾT BẠN
+   ========================================== */
+
+/* Định dạng thẻ bọc thông tin người dùng */
+.box-user {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e4e6eb;
+    margin-bottom: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.box-user:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Định dạng Avatar người dùng */
+.box-user .inner-avatar img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f0f2f5;
+}
+
+/* Định dạng khu vực tên và nút bấm */
+.box-user .inner-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.box-user .inner-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #050505;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.box-user .inner-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+/* Tùy chỉnh riêng cho các nút bấm trong card */
+.box-user .inner-buttons .btn {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 6px 12px;
+    transition: background-color 0.2s;
+    min-width: 100px;
+}
+
+.box-user .inner-buttons .btn-add-friend {
+    background-color: #e7f3ff;
+    color: #1877f2;
+    border: none;
+}
+
+.box-user .inner-buttons .btn-add-friend:hover {
+    background-color: #dbe7f2;
+}
+
+.box-user .inner-buttons .btn-cancel {
+    background-color: #e4e6eb;
+    color: #050505;
+    border: none;
+}
+
+.box-user .inner-buttons .btn-cancel:hover {
+    background-color: #d8dadf;
+}
+
+.box-user [button-cancel] {
+    display: none;
+}
+
+.box-user.add [button-add-friend] {
+    display: none;
+}
+
+.box-user.add [button-cancel] {
+    display: inline-block;
+}
+
+/* ==========================================
+   FIX DÀN TRANG DANH SÁCH USER
+   ========================================== */
+/* Tùy chỉnh riêng cho phần container của trang người dùng 
+   để nó căn trên cùng (top) thay vì bị đẩy giãn ra giữa/dưới */
+.body .container {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 40px;
+}
+
+/* Đảm bảo hàng (row) chứa các thẻ user dãn từ trên xuống */
+.body .container > .row:last-child {
+    align-content: flex-start;
+}
+
+/* ==========================================
+   FIX DÀN TRANG CHO CÁC TRANG DÙNG CONTAINER (Gợi ý kết bạn, v.v.)
+   ========================================== */
+.main .container .row,
+.main .container .col-12 {
+    height: auto;
+    margin-bottom: 15px;
+}
