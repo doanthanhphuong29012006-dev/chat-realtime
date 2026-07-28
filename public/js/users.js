@@ -27,3 +27,18 @@ if (listBtnCancelFriend.length > 0) {
     });
 }
 // End Friend Request Cancellation Feature
+
+// Friend Request Deletion Feature
+const listBtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
+if (listBtnRefuseFriend.length > 0) {
+    listBtnRefuseFriend.forEach(button => {
+        button.addEventListener("click", () => {
+            button.closest(".box-user").classList.add("refuse");
+
+            const userId = button.getAttribute("btn-refuse-friend");
+
+            socket.emit("CLIENT_REFUSE_FRIEND", userId);
+        });
+    });
+}
+// End Friend Request Deletion Feature

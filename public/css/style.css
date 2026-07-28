@@ -887,3 +887,55 @@ body {
     height: auto;
     margin-bottom: 15px;
 }
+
+/* ==========================================
+   TÙY CHỈNH NÚT LỜI MỜI KẾT BẠN (TRANG NHẬN LỜI MỜI)
+   ========================================== */
+.box-user .inner-buttons .btn-accept-friend {
+    background-color: #e7f3ff;
+    color: #1877f2;
+    border: none;
+}
+
+.box-user .inner-buttons .btn-accept-friend:hover {
+    background-color: #dbe7f2;
+}
+
+/* Nút Xóa (Màu xám giống Hủy) */
+.box-user .inner-buttons .btn-refuse-friend {
+    background-color: #e4e6eb;
+    color: #050505;
+    border: none;
+}
+
+.box-user .inner-buttons .btn-refuse-friend:hover {
+    background-color: #d8dadf;
+}
+
+/* Nút Đã xóa (Trạng thái disabled) */
+.box-user .inner-buttons .btn-deleted-friend {
+    background-color: #f0f2f5;
+    color: #bcc0c4;
+    border: 1px solid #e4e6eb;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ==========================================
+   LOGIC ẨN/HIỆN NÚT (Sự kiện từ file JavaScript)
+   ========================================== */
+/* Mặc định: Ẩn nút Đã xóa */
+.box-user [btn-deleted-friend] {
+    display: none;
+}
+
+/* Khi JS thêm class "refuse" vào box-user: Ẩn Chấp nhận & Xóa */
+.box-user.refuse [btn-accept-friend],
+.box-user.refuse [btn-refuse-friend] {
+    display: none;
+}
+
+/* Khi JS thêm class "refuse" vào box-user: Hiện nút Đã xóa */
+.box-user.refuse [btn-deleted-friend] {
+    display: inline-block;
+}

@@ -1,0 +1,42 @@
+extends ../../layouts/default-no-sidebar.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-3
+        include ../../partials/list-btn-users.pug
+
+        .row
+            .col-12
+                +box-head("Lời mời đã nhận")
+
+        .row
+            each user in users
+                .col-6
+                    div(class="box-user")
+                        div.inner-avatar
+                            img(
+                                src=(user.avatar ? user.avatar : "/images/avatar.jpg")
+                                alt=user.fullName
+                            )
+
+                        div.inner-info
+                            div.inner-name #{user.fullName}
+                            div.inner-buttons
+                                button(
+                                    class="btn btn-sm btn-accept-friend"
+                                    btn-accept-friend=user.id
+                                ) Chấp nhận
+
+                                button(
+                                    class="btn btn-sm btn-refuse-friend"
+                                    btn-refuse-friend=user.id
+                                ) Xóa
+
+                                button(
+                                    class="btn btn-sm btn-deleted-friend"
+                                    btn-deleted-friend=user.id
+                                    disabled
+                                ) Đã xóa
+
+block script
+    script(src="/js/users.js")
