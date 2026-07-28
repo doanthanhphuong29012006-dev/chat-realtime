@@ -1,11 +1,27 @@
-const User = require('../models/user.model')
+const User = require('../models/user.model');
+
+const usersSocket = require('../sockets/users.socket');
 
 // [GET]/users/suggestions
 module.exports.suggestions = async (req, res) => {
+    // Socket
+    usersSocket(res);
+    // End Socket
     const userId = res.locals.user.id;
 
+    const myUser = await User.findOne({
+        _id: userId
+    });
+
+    const requestFriends = myUser.requestFriends;
+    const acceptFriends = myUser.acceptFriends;
+
     const users = await User.find({
-        _id: { $ne: userId },
+        $and: [
+            { _id: { $ne: userId } },
+            { _id: { $nin: requestFriends } },
+            { _id: { $nin: acceptFriends } }
+        ],
         deleted: false,
         status: "active"
     }).select("id avatar fullName");
