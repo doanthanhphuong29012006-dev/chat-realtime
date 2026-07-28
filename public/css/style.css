@@ -939,3 +939,34 @@ body {
 .box-user.refuse [btn-deleted-friend] {
     display: inline-block;
 }
+
+/* ==========================================
+   TÙY CHỈNH NÚT "ĐÃ CHẤP NHẬN"
+   ========================================== */
+/* Định dạng nút Đã chấp nhận (Trạng thái disabled giống nút Đã xóa) */
+.box-user .inner-buttons .btn-accepted-friend {
+    background-color: #f0f2f5;
+    color: #bcc0c4;
+    border: 1px solid #e4e6eb;
+    cursor: not-allowed;
+    pointer-events: none; /* Vô hiệu hóa hiệu ứng hover */
+}
+
+/* ==========================================
+   LOGIC ẨN/HIỆN NÚT (Sự kiện từ file JavaScript)
+   ========================================== */
+/* Mặc định: Ẩn nút Đã chấp nhận */
+.box-user [btn-accepted-friend] {
+    display: none;
+}
+
+/* Khi JS thêm class "accepted" vào box-user: Ẩn nút Chấp nhận & Xóa */
+.box-user.accepted [btn-accept-friend],
+.box-user.accepted [btn-refuse-friend] {
+    display: none;
+}
+
+/* Khi JS thêm class "accepted" vào box-user: Hiện nút Đã chấp nhận */
+.box-user.accepted [btn-accepted-friend] {
+    display: inline-block;
+}
