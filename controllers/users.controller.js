@@ -31,3 +31,29 @@ module.exports.suggestions = async (req, res) => {
         users: users
     });
 }
+
+// [GET]/users/requests
+module.exports.requests = async (req, res) => {
+    // Socket
+    usersSocket(res);
+    // End Socket
+    const userId = res.locals.user.id;
+
+    const myUser = await User.findOne({
+        _id: userId
+    });
+
+    const requestFriends = myUser.requestFriends;
+    const acceptFriends = myUser.acceptFriends;
+
+    const users = await User.find({
+        _id: { $in: requestFriends },
+        deleted: false,
+        status: "active"
+    }).select("id avatar fullName");
+
+    res.render('pages/users/requests', {
+        pageTitle: "Lời mời đã gửi",
+        users: users
+    });
+}

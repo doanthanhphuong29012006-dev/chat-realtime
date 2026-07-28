@@ -5,4 +5,6 @@ const controller = require('../controllers/users.controller');
 
 router.get('/suggestions', controller.suggestions);
 
+router.get('/requests', controller.requests);
+
 module.exports = router;
