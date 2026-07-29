@@ -41,6 +41,15 @@ module.exports = (res) => {
                 userId: userId,
                 lengthAcceptFriend: lengthAcceptFriends
             });
+
+            const infoUserA = await User.findOne({
+                _id: myUserId
+            }).select("id fullName avatar");
+
+            socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
+                userId: userId,
+                infoUserA: infoUserA
+            });
         });
 
         // Friend Request Cancellation Feature
@@ -119,42 +128,35 @@ module.exports = (res) => {
         socket.on("CLIENT_ACCEPT_FRIEND", async (userId) => {
             const myUserId = res.locals.user.id;
             
-            const existIdAinB = await User.findOne({
+            const existFriendship = await User.findOne({
                 _id: myUserId,
-                acceptFriends: userId
+                "friendList.user_id": userId
             });
 
-            if (existIdAinB) {
+            if (!existFriendship) {
                 await User.updateOne({
                     _id: myUserId
                 }, {
-                    $push: { 
-                        friendList: 
-                        {
+                    $push: {
+                        friendList: {
                             user_id: userId,
                             room_chat_id: ""
                         }
                     },
+
                     $pull: { acceptFriends: userId }
                 });
-            }
 
-            const existIdBinA = await User.findOne({
-                _id: userId,
-                requestFriends: myUserId
-            });
-
-            if (existIdBinA) {
                 await User.updateOne({
                     _id: userId
                 }, {
-                    $push: { 
-                        friendList: 
-                        {
+                    $push: {
+                        friendList: {
                             user_id: myUserId,
                             room_chat_id: ""
                         }
                     },
+
                     $pull: { requestFriends: myUserId }
                 });
             }
