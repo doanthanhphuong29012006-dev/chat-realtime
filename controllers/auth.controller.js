@@ -34,7 +34,13 @@ module.exports.loginPost = async (req, res) => {
                 res.cookie('token', token, {
                     httpOnly: true,
                     maxAge: 1000 * 60 * 60 * 24
-                })
+                });
+
+                await User.updateOne({
+                    _id: user._id
+                }, {
+                    statusOnline: "online"
+                });
 
                 req.flash('success', "Đăng nhập thành công!");
                 res.redirect('/chat');
@@ -107,6 +113,26 @@ module.exports.registerPost = async (req, res) => {
         const currentUrl = req.get('Referrer');
         res.redirect(currentUrl);
         return;
+    }
+}
+
+// [GET] /auth/logout
+module.exports.logout = async (req, res) => {
+    try {
+        const userId = res.locals.user.id;
+
+        await User.updateOne({
+            _id: userId
+        }, {
+            statusOnline: "offline"
+        });
+
+        res.clearCookie("token");
+        res.redirect("/auth/login");
+    } catch (error) {
+        console.error("Lỗi hệ thống trong quá trình đăng xuất:", error);
+        res.clearCookie("token");
+        res.redirect("/auth/login");
     }
 }
 

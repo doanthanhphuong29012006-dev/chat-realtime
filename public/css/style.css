@@ -996,3 +996,51 @@ body {
     background-color: #ffffff;
     color: #0084ff;
 }
+
+/* ==========================================
+   TÙY CHỈNH DANH SÁCH BẠN BÈ (TRẠNG THÁI & NÚT)
+   ========================================== */
+
+/* 1. Định vị chấm xanh lên góc Avatar */
+.box-user .inner-avatar {
+    position: relative;
+    display: inline-block;
+}
+
+.box-user .inner-status {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 0.85rem;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Định dạng màu sắc trạng thái */
+.box-user .inner-status[status="online"] {
+    color: #31a24c;
+}
+
+.box-user .inner-status[status="offline"] {
+    color: #adb5bd;
+}
+
+/* 2. Định dạng nút Nhắn tin đồng bộ với nút Kết bạn */
+.box-user .inner-buttons .btn-message {
+    background-color: #e7f3ff;
+    color: #1877f2;
+    border: none;
+    min-width: 100px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.box-user .inner-buttons .btn-message:hover {
+    background-color: #dbe7f2;
+    color: #1877f2;
+}

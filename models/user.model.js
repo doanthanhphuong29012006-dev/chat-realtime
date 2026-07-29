@@ -6,10 +6,6 @@ const userSchema = new mongoose.Schema(
         fullName: String,
         email: String,
         password: String,
-        token: {
-            type: String,
-            default: generate.generateRandomString
-        },
         phone: String,
         avatar: String,
         status: {
@@ -24,6 +20,7 @@ const userSchema = new mongoose.Schema(
                 room_chat_id: String
             }
         ],
+        statusOnline: String,
         deleted: {
             type: Boolean,
             default: false

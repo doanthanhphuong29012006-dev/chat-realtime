@@ -1,0 +1,36 @@
+extends ../../layouts/default-no-sidebar.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-3
+        include ../../partials/list-btn-users.pug
+
+        .row
+            .col-12
+                +box-head("Danh sách bạn bè")
+
+        .row(data-users-accept=user.id)
+            each user in users
+                .col-6(user-id=user.id)
+                    div(class="box-user")
+                        div.inner-avatar
+                            img(
+                                src=(user.avatar ? user.avatar : "/images/avatar.jpg")
+                                alt=user.fullName
+                            )
+                            div(
+                                class="inner-status"
+                                status=user.statusOnline
+                            )
+                                i(class="fa-solid fa-circle")
+
+                        div.inner-info
+                            div.inner-name #{user.fullName}
+                            div.inner-buttons
+                                a(
+                                    href="#"
+                                    class="btn btn-sm btn-message me-1"
+                                ) Nhắn tin
+
+block script
+    script(src="/js/users.js")

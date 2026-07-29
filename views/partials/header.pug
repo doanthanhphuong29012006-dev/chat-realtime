@@ -6,4 +6,7 @@ header.chat-header
   .user-profile
     .avatar-mini
     span.username #{user.fullName}
-    button.btn-logout Đăng xuất
+    a(
+      href="/auth/logout" 
+    )
+      button.btn-logout Đăng xuất
