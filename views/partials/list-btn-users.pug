@@ -17,4 +17,9 @@
     a(
         class="btn-custom btn-nav"
         href="/users/accept"
-    ) <i class="fa-solid fa-user-check me-2"></i> Lời mời kết bạn
+    ) 
+        <i class="fa-solid fa-user-check me-2"></i> Lời mời kết bạn
+        span(
+            class="badge-notify"
+            badge-users-accept=user.id
+        ) #{user.acceptFriends.length}
