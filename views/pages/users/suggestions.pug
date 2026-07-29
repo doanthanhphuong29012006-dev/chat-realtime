@@ -9,9 +9,9 @@ block main
             .col-12 
                 +box-head("Gợi ý kết bạn")
 
-        .row
+        .row(data-users-suggestions=user.id)
             each user in users
-                .col-6
+                .col-6(user-id=user.id)
                     div(
                         class="box-user"
                     )

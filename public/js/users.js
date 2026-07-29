@@ -78,10 +78,10 @@ if (badgeUserAccept) {
 // End SERVER_RETURN_LENGTH_ACCEPT_FRIEND
 
 // SERVER_RETURN_INFO_ACCEPT_FRIEND
-const dataUsersAccept = document.querySelector("[data-users-accept]");
-if (dataUsersAccept) {
-    const userId = dataUsersAccept.getAttribute("data-users-accept");
-    socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
+socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
+    const dataUsersAccept = document.querySelector("[data-users-accept]");
+    if (dataUsersAccept) {
+        const userId = dataUsersAccept.getAttribute("data-users-accept");
         if (userId === data.userId) {
             const div = document.createElement("div");
             div.classList.add("col-6");
@@ -137,17 +137,29 @@ if (dataUsersAccept) {
         
             dataUsersAccept.appendChild(div);
         }
-    });
-}
+    }
+
+    const dataUsersSuggestion = document.querySelector("[data-users-suggestions]");
+    if (dataUsersSuggestion) {
+        const userId = dataUsersSuggestion.getAttribute("data-users-suggestions");
+        if (userId === data.userId) {
+            const boxUserRemove = document.querySelector(`[user-id="${data.infoUserA._id}"]`);
+            if (boxUserRemove) {
+                const dataUsersSuggestion = document.querySelector("[data-users-suggestions]");
+                dataUsersSuggestion.removeChild(boxUserRemove);
+            }
+        }
+    }
+});
 // End SERVER_RETURN_INFO_ACCEPT_FRIEND
 
 // SERVER_RETURN_USER_ID_CANCEL_FRIEND
 socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
     const userIdA = data.userIdA;
-    const boxUserReomove = document.querySelector(`[user-id="${userIdA}"]`);
-    if (boxUserReomove) {
+    const boxUserRemove = document.querySelector(`[user-id="${userIdA}"]`);
+    if (boxUserRemove) {
         const dataUsersAccept = document.querySelector("[data-users-accept]");
-        dataUsersAccept.removeChild(boxUserReomove);
+        dataUsersAccept.removeChild(boxUserRemove);
     }
 });
 // End SERVER_RETURN_USER_ID_CANCEL_FRIEND
