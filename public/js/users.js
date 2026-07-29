@@ -85,6 +85,7 @@ if (dataUsersAccept) {
         if (userId === data.userId) {
             const div = document.createElement("div");
             div.classList.add("col-6");
+            div.setAttribute("user-id", data.infoUserA._id);
 
             div.innerHTML = `
                 <div class="col-6">
@@ -139,3 +140,14 @@ if (dataUsersAccept) {
     });
 }
 // End SERVER_RETURN_INFO_ACCEPT_FRIEND
+
+// SERVER_RETURN_USER_ID_CANCEL_FRIEND
+socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
+    const userIdA = data.userIdA;
+    const boxUserReomove = document.querySelector(`[user-id="${userIdA}"]`);
+    if (boxUserReomove) {
+        const dataUsersAccept = document.querySelector("[data-users-accept]");
+        dataUsersAccept.removeChild(boxUserReomove);
+    }
+});
+// End SERVER_RETURN_USER_ID_CANCEL_FRIEND
