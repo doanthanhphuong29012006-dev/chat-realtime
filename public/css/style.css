@@ -1214,3 +1214,89 @@ input[readonly].input-primary:focus {
     font-size: 0.5rem;
     color: #31a24c;
 }
+
+/* ==========================================
+   GIAO DIỆN TRANG CHỦ MẶC ĐỊNH (WELCOME SCREEN)
+   ========================================== */
+.welcome-screen {
+    height: 100%;
+    background-color: #f0f2f5;
+    text-align: center;
+    padding: 20px;
+    user-select: none;
+}
+
+.welcome-screen .welcome-logo {
+    width: 140px;
+    height: auto;
+    opacity: 0.9;
+    animation: floating 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+.welcome-screen .welcome-title {
+    color: #1c1e21;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+}
+
+.welcome-screen .welcome-desc {
+    color: #65676b;
+    font-size: 1rem;
+    max-width: 450px;
+    margin: 0 auto 15px auto;
+    line-height: 1.5;
+}
+
+.welcome-screen .btn-welcome-action {
+    background-color: #0084ff;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 132, 255, 0.2);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.welcome-screen .btn-welcome-action:hover {
+    background-color: #0073e6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 132, 255, 0.3);
+}
+
+/* ==========================================
+   TÙY CHỈNH LOGO VÀ NÚT TRANG CHỦ HEADER
+   ========================================== */
+.chat-header .logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #1c1e21;
+    transition: color 0.2s ease;
+}
+
+.chat-header .logo a:hover {
+    color: #0084ff;
+}
+
+.chat-header .logo .logo-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chat-header .logo a:hover .header-logo {
+    transform: scale(1.05);
+}
