@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const RoomChat = require('../models/rooms-chat.model');
 
 module.exports = (res) => {
     _io.once('connection', (socket) => {
@@ -139,13 +140,33 @@ module.exports = (res) => {
             });
 
             if (!existFriendship) {
+                // Create Room Chat
+                const dataRoom = {
+                    typeRoom: "friend",
+                    users: [
+                        {
+                            user_id: myUserId,
+                            role: "superAdmin"
+                        }, 
+                        {
+                            user_id: userId,
+                            role: "superAdmin"
+                        }
+                    ]
+                };
+
+                const roomChat = new RoomChat(dataRoom);
+                await roomChat.save();
+                // End Create Room Chat
+
+                // Add Friend
                 await User.updateOne({
                     _id: myUserId
                 }, {
                     $push: {
                         friendList: {
                             user_id: userId,
-                            room_chat_id: ""
+                            room_chat_id: roomChat.id
                         }
                     },
 
@@ -158,12 +179,13 @@ module.exports = (res) => {
                     $push: {
                         friendList: {
                             user_id: myUserId,
-                            room_chat_id: ""
+                            room_chat_id: roomChat.id
                         }
                     },
 
                     $pull: { requestFriends: myUserId }
                 });
+                // End Add Friend
             }
         });
     });

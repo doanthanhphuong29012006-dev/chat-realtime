@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controllers/chat.controller');
+const chatMiddleware = require('../middlewares/chat.middleware');
 
-router.get('/', controller.index);
+router.get('/:roomChatId', chatMiddleware.isAccept, controller.index);
 
 module.exports = router;

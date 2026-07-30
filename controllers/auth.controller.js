@@ -48,7 +48,7 @@ module.exports.loginPost = async (req, res) => {
                 });
 
                 req.flash('success', "Đăng nhập thành công!");
-                res.redirect('/chat');
+                res.redirect('/users/suggestions');
             } else {
                 req.flash('error', "Mật khẩu không chính xác!");
                 const currentUrl = req.get('Referrer');

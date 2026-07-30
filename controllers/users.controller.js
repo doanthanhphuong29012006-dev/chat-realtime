@@ -15,12 +15,14 @@ module.exports.suggestions = async (req, res) => {
 
     const requestFriends = myUser.requestFriends;
     const acceptFriends = myUser.acceptFriends;
+    const listFriends = myUser.friendList.map(friend => friend.user_id);
 
     const users = await User.find({
         $and: [
             { _id: { $ne: userId } },
             { _id: { $nin: requestFriends } },
-            { _id: { $nin: acceptFriends } }
+            { _id: { $nin: acceptFriends } },
+            { _id: { $nin: listFriends } }
         ],
         deleted: false,
         status: "active"
@@ -101,6 +103,12 @@ module.exports.friends = async (req, res) => {
         deleted: false,
         status: "active"
     }).select("id avatar fullName statusOnline");
+
+    for (const user of users) {
+        const infoFriend = friendList.find(friend => friend.user_id === user.id);
+
+        user.infoFriend = infoFriend;
+    }
 
     res.render('pages/users/friends', {
         pageTitle: "Danh sách bạn bè",

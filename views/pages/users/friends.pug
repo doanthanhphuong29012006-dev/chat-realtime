@@ -28,7 +28,7 @@ block main
                             div.inner-name #{user.fullName}
                             div.inner-buttons
                                 a(
-                                    href="#"
+                                    href=`/chat/${user.infoFriend.room_chat_id}`
                                     class="btn btn-sm btn-message me-1"
                                 ) Nhắn tin
 
