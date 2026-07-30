@@ -13,3 +13,22 @@ if (showAlert) {
     })
 }
 // End Show Alert
+
+// Upload Image
+const avatarContainerPreview = document.querySelector(".avatar-preview-container");
+let avatarPreview;
+if (avatarContainerPreview) {
+    avatarPreview = avatarContainerPreview.querySelector(".avatar-preview");
+}
+
+const uploadActionContainer = document.querySelector(".upload-action-container");
+if (uploadActionContainer) {
+    const avatarUpload = uploadActionContainer.querySelector("#avatar-upload");
+    avatarUpload.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            avatarPreview.src = URL.createObjectURL(file);
+        }
+    });
+}
+// End Upload Image

@@ -4,9 +4,13 @@ header.chat-header
       img.header-logo(src="/images/rat.svg", alt="Logo Chat Chit")
 
   .user-profile
-    .avatar-mini
+    a(href=`/user/edit`)
+      .avatar-mini
+        img(
+          src=user.avatar
+          alt=user.fullName
+        )
+        
     span.username #{user.fullName}
-    a(
-      href="/auth/logout" 
-    )
+    a(href="/auth/logout")
       button.btn-logout Đăng xuất

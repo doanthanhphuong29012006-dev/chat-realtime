@@ -1044,3 +1044,127 @@ body {
     background-color: #dbe7f2;
     color: #1877f2;
 }
+
+/* ==========================================
+   TÙY CHỈNH AVATAR HEADER
+   ========================================== */
+/* Định dạng khung chứa ảnh */
+.chat-header .user-profile .avatar-mini {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-header .user-profile .avatar-mini img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e4e6eb;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.chat-header .user-profile a:hover .avatar-mini img {
+    transform: scale(1.05);
+    border-color: #0084ff;
+}
+
+.chat-header .user-profile a {
+    text-decoration: none;
+}
+
+/* ==========================================
+   GIAO DIỆN CHỈNH SỬA THÔNG TIN CÁ NHÂN
+   ========================================== */
+.profile-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px 40px;
+    background-color: #ffffff;
+}
+
+.avatar-preview-container {
+    display: inline-block;
+    position: relative;
+}
+
+.avatar-preview {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e7f3ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.avatar-preview:hover {
+    transform: scale(1.02);
+}
+
+.btn-custom-upload {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    background-color: #e4e6eb;
+    color: #050505;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+.btn-custom-upload:hover {
+    background-color: #d8dadf;
+}
+
+input[readonly].input-primary {
+    background-color: #f0f2f5;
+    cursor: not-allowed;
+    color: #65676b;
+    border-color: #e4e6eb;
+}
+
+input[readonly].input-primary:focus {
+    box-shadow: none;
+    border-color: #e4e6eb;
+}
+
+.btn-save-profile {
+    background-color: #0084ff !important;
+    color: white !important;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-save-profile:hover {
+    background-color: #0073e6 !important;
+}
+
+/* ==========================================
+   TÙY CHỈNH GIAO DIỆN THANH CUỘN (SCROLLBAR)
+   ========================================== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #bcc0c4; 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #90949c; 
+}

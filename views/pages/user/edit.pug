@@ -1,0 +1,67 @@
+extends ../../layouts/default-no-sidebar.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-4
+        .row.justify-content-center
+            .col-md-8.col-lg-6
+                +box-head("Thông tin cá nhân")
+
+                .card.profile-card.mt-4
+                    .card-body
+                        form(
+                            action=`/user/edit?_method=PATCH`
+                            method="POST"
+                            enctype="multipart/form-data"
+                        )
+                            .text-center.mb-4
+                                .avatar-preview-container
+                                    img.avatar-preview(
+                                        src=user.avatar
+                                        alt=user.fullName
+                                        id="avatar-preview"
+                                    )
+                                .upload-action-container.mt-3
+                                    input#avatar-upload.d-none(
+                                        type="file"
+                                        name="avatar"
+                                        accept="image/*"
+                                    )
+                                    label.btn-custom-upload(for="avatar-upload")
+                                        i.fa-solid.fa-camera.me-2
+                                        span Cập nhật ảnh đại diện
+
+                            .mb-3
+                                label.form-label.fw-bold(for="fullName") Họ và tên
+                                input.form-control.input-primary(
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    value=user.fullName
+                                    required
+                                )
+
+                            .mb-3
+                                label.form-label.fw-bold(for="email") Email
+                                input.form-control.input-primary(
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value=user.email
+                                    readonly
+                                )
+                                small.text-muted Email được sử dụng làm tài khoản đăng nhập và không thể thay đổi.
+
+                            .mb-3
+                                label.form-label.fw-bold(for="phone") Số điện thoại
+                                input.form-control.input-primary(
+                                    type="text"
+                                    id="phone"
+                                    name="phone"
+                                    value=user.phone
+                                    placeholder="Nhập số điện thoại của bạn..."
+                                )
+
+                            button.btn.btn-primary.w-100.mt-4.btn-save-profile(
+                                type="submit"
+                            ) Lưu thay đổi
