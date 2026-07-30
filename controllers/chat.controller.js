@@ -1,5 +1,6 @@
 const Chat = require('../models/chat.model');
 const User = require('../models/user.model');
+const RoomChat = require('../models/rooms-chat.model');
 
 const chatSocket = require('../sockets/chat.socket');
 
@@ -8,6 +9,18 @@ module.exports.index = async (req, res) => {
     const roomChatId = req.params.roomChatId;
 
     chatSocket(req, res);
+
+    const roomChat = await RoomChat.findOne({
+        _id: roomChatId,
+        deleted: false
+    });
+
+    const partnerId = roomChat.users.find(userId => userId.user_id.toString() !== res.locals.user.id);
+    const partner = await User.findOne({
+        _id: partnerId.user_id,
+        deleted: false,
+        status: "active"
+    }).select("fullName avatar statusOnline");
 
     const chats = await Chat.find({
         room_chat_id: roomChatId,
@@ -24,6 +37,7 @@ module.exports.index = async (req, res) => {
 
     res.render('pages/chat/index', {
         pageTitle: "Chat",
-        chats: chats
+        chats: chats,
+        partner: partner
     });
 }

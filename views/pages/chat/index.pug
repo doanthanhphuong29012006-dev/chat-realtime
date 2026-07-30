@@ -4,9 +4,17 @@ block main
     .row
         .col-12
             .chat(my-id=user.id)
-                //- .inner-head
-                //-     .inner-avatar EY
-                //-     .inner-name Em Yêu
+                .inner-head
+                    .inner-avatar
+                        img(
+                            src=partner.avatar
+                            alt=partner.fullName
+                        )
+                    .inner-info
+                        .inner-name #{partner ? partner.fullName : "Tên người dùng"}
+                        .inner-status 
+                            i(class="fa-solid fa-circle")
+                            span Đang hoạt động
 
                 .inner-body
                     each chat in chats
