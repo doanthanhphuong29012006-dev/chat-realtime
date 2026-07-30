@@ -145,8 +145,7 @@ socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
         if (userId === data.userId) {
             const boxUserRemove = document.querySelector(`[user-id="${data.infoUserA._id}"]`);
             if (boxUserRemove) {
-                const dataUsersSuggestion = document.querySelector("[data-users-suggestions]");
-                dataUsersSuggestion.removeChild(boxUserRemove);
+                boxUserRemove.remove();
             }
         }
     }
@@ -158,8 +157,19 @@ socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
     const userIdA = data.userIdA;
     const boxUserRemove = document.querySelector(`[user-id="${userIdA}"]`);
     if (boxUserRemove) {
-        const dataUsersAccept = document.querySelector("[data-users-accept]");
-        dataUsersAccept.removeChild(boxUserRemove);
+        boxUserRemove.remove();
     }
 });
 // End SERVER_RETURN_USER_ID_CANCEL_FRIEND
+
+// SERVER_RETURN_USER_STATUS_ONLINE
+socket.on("SERVER_RETURN_USER_STATUS_ONLINE", (data) => {
+    const dataUsersFriend = document.querySelector("[data-users-friend]");
+    if (dataUsersFriend) {
+        const boxUser = dataUsersFriend.querySelector(`[user-id="${data.userId}"]`);
+        if (boxUser) {
+            boxUser.querySelector("[status]").setAttribute("status", data.status);
+        }
+    }
+});
+// End SERVER_RETURN_USER_STATUS_ONLINE

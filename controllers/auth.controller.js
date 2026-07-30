@@ -42,6 +42,11 @@ module.exports.loginPost = async (req, res) => {
                     statusOnline: "online"
                 });
 
+                _io.emit('SERVER_RETURN_USER_STATUS_ONLINE', {
+                    userId: user.id,
+                    status: "online"
+                });
+
                 req.flash('success', "Đăng nhập thành công!");
                 res.redirect('/chat');
             } else {
@@ -125,6 +130,11 @@ module.exports.logout = async (req, res) => {
             _id: userId
         }, {
             statusOnline: "offline"
+        });
+
+        _io.emit('SERVER_RETURN_USER_STATUS_ONLINE', {
+            userId: userId,
+            status: "offline"
         });
 
         res.clearCookie("token");
