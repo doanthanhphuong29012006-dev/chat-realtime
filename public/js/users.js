@@ -1,3 +1,5 @@
+const myUserId = document.querySelector("[my-id]").getAttribute("my-id");
+
 // Request Submission Feature
 const listBtnAddFriend = document.querySelectorAll("[button-add-friend]");
 if (listBtnAddFriend.length > 0) {
@@ -7,7 +9,10 @@ if (listBtnAddFriend.length > 0) {
 
             const userId = button.getAttribute("button-add-friend");
 
-            socket.emit("CLIENT_ADD_FRIEND", userId);
+            socket.emit("CLIENT_ADD_FRIEND", {
+                myUserId: myUserId,
+                userId: userId
+            });
         });
     });
 }
@@ -22,7 +27,10 @@ if (listBtnCancelFriend.length > 0) {
 
             const userId = button.getAttribute("button-cancel");
 
-            socket.emit("CLIENT_CANCEL_FRIEND", userId);
+            socket.emit("CLIENT_CANCEL_FRIEND", {
+                myUserId: myUserId,
+                userId: userId
+            });
         });
     });
 }
@@ -35,7 +43,10 @@ const refuseFriend = (button) => {
 
         const userId = button.getAttribute("btn-refuse-friend");
 
-        socket.emit("CLIENT_REFUSE_FRIEND", userId);
+        socket.emit("CLIENT_REFUSE_FRIEND", {
+            myUserId: myUserId,
+            userId: userId
+        });
     });
 }
 const listBtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
@@ -53,7 +64,10 @@ const acceptFriend = (button) => {
 
         const userId = button.getAttribute("btn-accept-friend");
 
-        socket.emit("CLIENT_ACCEPT_FRIEND", userId);
+        socket.emit("CLIENT_ACCEPT_FRIEND", {
+            myUserId: myUserId,
+            userId: userId
+        });
     });
 }
 
@@ -88,42 +102,40 @@ socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
             div.setAttribute("user-id", data.infoUserA._id);
 
             div.innerHTML = `
-                <div class="col-6">
-                    <div class="box-user">
-                        <div class="inner-avatar">
-                            <img src="/images/avatar.jpg" alt=${data.infoUserA.fullName}>
-                        </div>
+                <div class="box-user">
+                    <div class="inner-avatar">
+                        <img src="/images/avatar.jpg" alt=${data.infoUserA.fullName}>
+                    </div>
 
-                        <div class="inner-info">    
-                            <div class="inner-name">${data.infoUserA.fullName}</div>
-                            <div class="inner-buttons"> 
-                                <button 
-                                    class="btn btn-sm btn-accept-friend" 
-                                    btn-accept-friend=${data.infoUserA._id}
-                                >
-                                    Chấp nhận
-                                </button>
-                                <button 
-                                    class="btn btn-sm btn-refuse-friend" 
-                                    btn-refuse-friend=${data.infoUserA._id}
-                                >
-                                    Xóa
-                                </button>
-                                <button 
-                                    class="btn btn-sm btn-deleted-friend" 
-                                    btn-deleted-friend=${data.infoUserA._id} 
-                                    disabled=""
-                                >
-                                    Đã xóa
-                                </button>
-                                <button 
-                                    class="btn btn-sm btn-accepted-friend" 
-                                    btn-accepted-friend=${data.infoUserA._id}
-                                    disabled=""
-                                >
-                                    Đã chấp nhận
-                                </button>
-                            </div>
+                    <div class="inner-info">    
+                        <div class="inner-name">${data.infoUserA.fullName}</div>
+                        <div class="inner-buttons"> 
+                            <button 
+                                class="btn btn-sm btn-accept-friend" 
+                                btn-accept-friend=${data.infoUserA._id}
+                            >
+                                Chấp nhận
+                            </button>
+                            <button 
+                                class="btn btn-sm btn-refuse-friend" 
+                                btn-refuse-friend=${data.infoUserA._id}
+                            >
+                                Xóa
+                            </button>
+                            <button 
+                                class="btn btn-sm btn-deleted-friend" 
+                                btn-deleted-friend=${data.infoUserA._id} 
+                                disabled=""
+                            >
+                                Đã xóa
+                            </button>
+                            <button 
+                                class="btn btn-sm btn-accepted-friend" 
+                                btn-accepted-friend=${data.infoUserA._id}
+                                disabled=""
+                            >
+                                Đã chấp nhận
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ block main
         include ../../partials/list-btn-users.pug
 
         .row
-            .col-12
+            .col-12(my-id=user.id)
                 +box-head("Danh sách bạn bè")
 
         .row(data-users-friend=user.id)

@@ -9,6 +9,12 @@ const upload = new FileUploadWithPreview('upload-images', {
 });
 // End File Upload With Preview
 
+const roomChatId = document.querySelector("[room-id]").getAttribute("room-id");
+const myId = document.querySelector("[my-id]").getAttribute("my-id");
+const myFullName = document.querySelector("[my-name]").getAttribute("my-name");
+
+socket.emit("CLIENT_JOIN_ROOM", roomChatId);
+
 // CLIENT_SEND_MESSAGE
 var timeOut;
 
@@ -22,6 +28,9 @@ if (formSendData) {
 
         if (content || images.length > 0) {
             socket.emit("CLIENT_SEND_MESSAGE", {
+                roomChatId: roomChatId,
+                fullName: myFullName,
+                userId: myId,
                 content: content,
                 images: images
             });
@@ -35,7 +44,12 @@ if (formSendData) {
                 previewImages.classList.remove("active");
             }
 
-            socket.emit("CLIENT_SEND_TYPING", "hidden");
+            socket.emit("CLIENT_SEND_TYPING", {
+                roomChatId: roomChatId,
+                userId: myId,
+                fullName: myFullName,
+                type: "hidden"
+            });
             clearTimeout(timeOut);
         }
     });
@@ -100,12 +114,22 @@ if (bodyChat) {
 
 // Show Typing
 const showTyping = () => {
-    socket.emit("CLIENT_SEND_TYPING", "show");
+    socket.emit("CLIENT_SEND_TYPING", {
+        roomChatId: roomChatId,
+        userId: myId,
+        fullName: myFullName,
+        type: "show"
+    });
 
     clearTimeout(timeOut);
 
     timeOut = setTimeout(() => {
-        socket.emit("CLIENT_SEND_TYPING", "hidden");
+        socket.emit("CLIENT_SEND_TYPING", {
+            roomChatId: roomChatId,
+            userId: myId,
+            fullName: myFullName,
+            type: "hidden"
+        });
     }, 3000);
 }
 // End Show Typing

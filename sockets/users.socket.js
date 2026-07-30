@@ -1,11 +1,12 @@
 const User = require('../models/user.model');
 const RoomChat = require('../models/rooms-chat.model');
 
-module.exports = (res) => {
-    _io.once('connection', (socket) => {
+module.exports = (io) => {
+    io.on('connection', (socket) => {
         // Request Submission Feature
-        socket.on("CLIENT_ADD_FRIEND", async (userId) => {
-            const myUserId = res.locals.user.id;
+        socket.on("CLIENT_ADD_FRIEND", async (data) => {
+            const myUserId = data.myUserId;
+            const userId = data.userId;
             
             const existIdAinB = await User.findOne({
                 _id: userId,
@@ -54,8 +55,9 @@ module.exports = (res) => {
         });
 
         // Friend Request Cancellation Feature
-        socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {
-            const myUserId = res.locals.user.id;
+        socket.on("CLIENT_CANCEL_FRIEND", async (data) => {
+            const myUserId = data.myUserId;
+            const userId = data.userId;
             
             const existIdAinB = await User.findOne({
                 _id: userId,
@@ -100,8 +102,9 @@ module.exports = (res) => {
         });
 
         // Friend Request Deletion Feature
-        socket.on("CLIENT_REFUSE_FRIEND", async (userId) => {
-            const myUserId = res.locals.user.id;
+        socket.on("CLIENT_REFUSE_FRIEND", async (data) => {
+            const myUserId = data.myUserId;
+            const userId = data.userId;
             
             const existIdAinB = await User.findOne({
                 _id: myUserId,
@@ -131,8 +134,9 @@ module.exports = (res) => {
         });
 
         // Friend Request Acceptance Feature
-        socket.on("CLIENT_ACCEPT_FRIEND", async (userId) => {
-            const myUserId = res.locals.user.id;
+        socket.on("CLIENT_ACCEPT_FRIEND", async (data) => {
+            const myUserId = data.myUserId;
+            const userId = data.userId;
             
             const existFriendship = await User.findOne({
                 _id: myUserId,

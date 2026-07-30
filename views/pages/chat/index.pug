@@ -3,7 +3,11 @@ extends ../../layouts/default.pug
 block main
     .row
         .col-12
-            .chat(my-id=user.id)
+            .chat(
+                my-id=user.id
+                my-name=user.fullName
+                room-id=roomChatId
+            )
                 .inner-head
                     .inner-avatar
                         img(

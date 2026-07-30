@@ -19,6 +19,9 @@ database.connect();
 const server = createServer(app);
 const io = new Server(server);
 global._io = io;
+
+require('./sockets/chat.socket')(io);
+require('./sockets/users.socket')(io);
 // End SocketIO
 
 app.use(methodOverride('_method'));

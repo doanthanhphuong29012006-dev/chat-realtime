@@ -8,8 +8,6 @@ const chatSocket = require('../sockets/chat.socket');
 module.exports.index = async (req, res) => {
     const roomChatId = req.params.roomChatId;
 
-    chatSocket(req, res);
-
     const roomChat = await RoomChat.findOne({
         _id: roomChatId,
         deleted: false
@@ -38,6 +36,7 @@ module.exports.index = async (req, res) => {
     res.render('pages/chat/index', {
         pageTitle: "Chat",
         chats: chats,
-        partner: partner
+        partner: partner,
+        roomChatId: roomChatId
     });
 }

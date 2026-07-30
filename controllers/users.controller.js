@@ -4,9 +4,6 @@ const usersSocket = require('../sockets/users.socket');
 
 // [GET]/users/suggestions
 module.exports.suggestions = async (req, res) => {
-    // Socket
-    usersSocket(res);
-    // End Socket
     const userId = res.locals.user.id;
 
     const myUser = await User.findOne({
@@ -36,9 +33,6 @@ module.exports.suggestions = async (req, res) => {
 
 // [GET]/users/requests
 module.exports.requests = async (req, res) => {
-    // Socket
-    usersSocket(res);
-    // End Socket
     const userId = res.locals.user.id;
 
     const myUser = await User.findOne({
@@ -61,9 +55,6 @@ module.exports.requests = async (req, res) => {
 
 // [GET]/users/accept
 module.exports.accept = async (req, res) => {
-    // Socket
-    usersSocket(res);
-    // End Socket
     const userId = res.locals.user.id;
 
     const myUser = await User.findOne({
@@ -86,9 +77,6 @@ module.exports.accept = async (req, res) => {
 
 // [GET]/users/friends
 module.exports.friends = async (req, res) => {
-    // Socket
-    usersSocket(res);
-    // End Socket
     const userId = res.locals.user.id;
 
     const myUser = await User.findOne({

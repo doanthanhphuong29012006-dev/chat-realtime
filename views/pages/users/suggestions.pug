@@ -6,7 +6,7 @@ block main
         include ../../partials/list-btn-users.pug
 
         .row.mb-4
-            .col-12 
+            .col-12(my-id=user.id)
                 +box-head("Gợi ý kết bạn")
 
         .row(data-users-suggestions=user.id)
