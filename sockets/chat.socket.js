@@ -1,7 +1,10 @@
 const Chat = require('../models/chat.model');
+const RoomChat = require('../models/rooms-chat.model.js');
+const User = require('../models/user.model.js');
 
 const uploadToCloudinaryHelper = require('../helpers/uploadToCloudinary.js');
-const RoomChat = require('../models/rooms-chat.model.js');
+
+const onlineTimeouts = {};
 
 module.exports = (io) => {
 
@@ -10,8 +13,49 @@ module.exports = (io) => {
             socket.join(roomChatId);
         });
 
-        socket.on("CLIENT_JOIN_GLOBAL", (userId) => {
+        socket.on("CLIENT_JOIN_GLOBAL", async (userId) => {
             socket.join(userId);
+            socket.userId = userId;
+
+            if (onlineTimeouts[userId]) {
+                clearTimeout(onlineTimeouts[userId]);
+                delete onlineTimeouts[userId];
+            }
+
+            await User.updateOne({ 
+                _id: userId 
+            }, { 
+                statusOnline: "online" 
+            });
+
+            socket.broadcast.emit("SERVER_RETURN_USER_STATUS_ONLINE", {
+                userId: userId,
+                status: "online"
+            });
+        });
+
+        socket.on('disconnect', async () => {
+            const userId = socket.userId;
+
+            if (userId) {
+                const activeTabs = io.sockets.adapter.rooms.get(userId);
+                if (!activeTabs || activeTabs.size === 0) {
+                    onlineTimeouts[userId] = setTimeout(async () => {
+                        await User.updateOne({ 
+                            _id: userId 
+                        }, { 
+                            statusOnline: "offline" 
+                        });
+
+                        socket.broadcast.emit("SERVER_RETURN_USER_STATUS_ONLINE", {
+                            userId: userId,
+                            status: "offline"
+                        });
+
+                        delete onlineTimeouts[userId];
+                    }, 3000);
+                }
+            }
         });
 
         socket.on("CLIENT_SEND_MESSAGE", async (data) => {
