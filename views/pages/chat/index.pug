@@ -6,16 +6,16 @@ block main
             .chat(
                 my-id=user.id
                 my-name=user.fullName
-                room-id=roomChatId
+                room-id=roomChat._id
             )
                 .inner-head
                     .inner-avatar
                         img(
-                            src=partner.avatar
-                            alt=partner.fullName
+                            src=(roomChat.typeRoom === "group") ? roomChat.avatar : partner.avatar
+                            alt=(roomChat.typeRoom === "group") ? roomChat.title : partner.fullName
                         )
                     .inner-info
-                        .inner-name #{partner ? partner.fullName : "Tên người dùng"}
+                        .inner-name #{(roomChat.typeRoom === "group") ? roomChat.title : partner.fullName}
                         .inner-status 
                             i(class="fa-solid fa-circle")
                             span Đang hoạt động

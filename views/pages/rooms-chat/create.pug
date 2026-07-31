@@ -1,0 +1,64 @@
+extends ../../layouts/default-no-sidebar.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-4
+        .row.justify-content-center
+            .col-md-8.col-lg-6
+                +box-head("Tạo phòng chat")
+
+                .card.create-room-card.mt-4
+                    .card-body
+                        form(
+                            action="/rooms-chat/create"
+                            method="POST"
+                            enctype="multipart/form-data"
+                        )
+                            .text-center.mb-4
+                                .avatar-preview-container
+                                    img.avatar-preview(
+                                        src=user.avatar
+                                        alt=user.fullName
+                                        id="avatar-preview"
+                                    )
+                                .upload-action-container.mt-3
+                                    input#avatar-upload.d-none(
+                                        type="file"
+                                        name="avatar"
+                                        accept="image/*"
+                                    )
+                                    label.btn-custom-upload(for="avatar-upload")
+                                        i.fa-solid.fa-camera.me-2
+                                        span Cập nhật ảnh đại diện
+
+                            .mb-4
+                                label.form-label.fw-bold(for="title") Tên phòng chat
+                                input.form-control.input-primary(
+                                    type="text"
+                                    id="title"
+                                    name="title"
+                                    placeholder="Nhập tên phòng chat..."
+                                    required
+                                )
+
+                            .mb-4
+                                label.form-label.fw-bold Thêm thành viên
+                                .member-list-container
+                                    
+                                    each friend in friendList
+                                        .friend-item
+                                            .form-check.d-flex.align-items-center.m-0.p-0
+                                                input.form-check-input.me-3.ms-2(
+                                                    type="checkbox"
+                                                    value=friend.user_id
+                                                    id=`user-${friend.user_id}`
+                                                    name="usersId"
+                                                )
+                                                label.form-check-label.d-flex.align-items-center.w-100(for=`user-${friend.user_id}`)
+                                                    .avatar-mini.me-3
+                                                        img(src=friend.infoFriend.avatar alt=friend.infoFriend.fullName)
+                                                    .friend-name #{friend.infoFriend.fullName}
+
+                            button.btn.btn-primary.w-100.mt-2.btn-create-submit(
+                                type="submit"
+                            ) Tạo phòng ngay

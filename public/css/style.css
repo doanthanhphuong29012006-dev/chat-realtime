@@ -1300,3 +1300,165 @@ input[readonly].input-primary:focus {
 .chat-header .logo a:hover .header-logo {
     transform: scale(1.05);
 }
+
+/* ==========================================
+   DANH SÁCH PHÒNG CHAT (ROOMS)
+   ========================================== */
+.btn-create-room {
+    background-color: #0084ff;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0, 132, 255, 0.2);
+}
+
+.btn-create-room:hover {
+    background-color: #0073e6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 132, 255, 0.3);
+}
+
+.box-room {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e4e6eb;
+    margin-bottom: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.box-room:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.box-room .inner-avatar img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f0f2f5;
+}
+
+/* Thông tin phòng (Tên và nút) */
+.box-room .inner-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.box-room .inner-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #050505;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Định dạng nút Nhắn tin trong thẻ phòng */
+.box-room .inner-buttons .btn {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 6px 12px;
+    min-width: 100px;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.box-room .inner-buttons .btn-primary {
+    background-color: #e7f3ff;
+    color: #1877f2;
+    border: none;
+}
+
+.box-room .inner-buttons .btn-primary:hover {
+    background-color: #dbe7f2;
+}
+
+/* ==========================================
+   GIAO DIỆN TẠO PHÒNG CHAT
+   ========================================== */
+.create-room-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 20px 30px;
+    background-color: #ffffff;
+}
+
+/* Khung cuộn chứa danh sách bạn bè */
+.member-list-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e4e6eb;
+    border-radius: 12px;
+    padding: 8px;
+    background-color: #f9f9f9;
+}
+
+/* Định dạng từng dòng (item) người dùng */
+.friend-item {
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.friend-item:hover {
+    background-color: #e6f2ff;
+}
+
+/* Tùy chỉnh Avatar nhỏ gọn */
+.friend-item .avatar-mini img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e4e6eb;
+}
+
+/* Tên người dùng */
+.friend-item .friend-name {
+    font-weight: 600;
+    color: #1c1e21;
+    font-size: 1rem;
+}
+
+/* Phóng to checkbox và tạo con trỏ chuột pointer */
+.friend-item .form-check-input {
+    width: 1.3rem;
+    height: 1.3rem;
+    cursor: pointer;
+}
+
+.friend-item .form-check-label {
+    cursor: pointer;
+}
+
+/* Nút Submit Tạo phòng */
+.btn-create-submit {
+    background-color: #0084ff;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    font-size: 1.05rem;
+    transition: background-color 0.2s;
+}
+
+.btn-create-submit:hover {
+    background-color: #0073e6;
+}

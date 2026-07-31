@@ -1,10 +1,15 @@
 header.chat-header
-  .logo
+  .logo.d-flex.align-items-center.gap-4
     a(href="/")
       img.header-logo(src="/images/rat.svg", alt="Logo Chat Chit")
       span.logo-text
         i.fa-solid.fa-house
         | Trang chủ
+    
+    a(href="/rooms-chat")
+      span.logo-text
+        i.fa-solid.fa-comments
+        | Phòng chat
 
   .user-profile
     a(href=`/user/edit`)

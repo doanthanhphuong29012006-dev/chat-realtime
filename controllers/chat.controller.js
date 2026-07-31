@@ -37,6 +37,6 @@ module.exports.index = async (req, res) => {
         pageTitle: "Chat",
         chats: chats,
         partner: partner,
-        roomChatId: roomChatId
+        roomChat: roomChat
     });
 }
