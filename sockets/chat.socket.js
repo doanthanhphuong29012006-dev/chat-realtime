@@ -1,12 +1,17 @@
 const Chat = require('../models/chat.model');
 
 const uploadToCloudinaryHelper = require('../helpers/uploadToCloudinary.js');
+const RoomChat = require('../models/rooms-chat.model.js');
 
 module.exports = (io) => {
 
     io.on('connection', (socket) => {
         socket.on("CLIENT_JOIN_ROOM", (roomChatId) => {
             socket.join(roomChatId);
+        });
+
+        socket.on("CLIENT_JOIN_GLOBAL", (userId) => {
+            socket.join(userId);
         });
 
         socket.on("CLIENT_SEND_MESSAGE", async (data) => {
@@ -31,6 +36,20 @@ module.exports = (io) => {
                 content: data.content,
                 images: images
             });
+
+            const room = await RoomChat.findOne({
+                _id: data.roomChatId,
+                deleted: false
+            });
+            if (room) {
+                for (const member of room.users) {
+                    io.to(member.user_id).emit("SERVER_RETURN_SIDEBAR", {
+                        roomChatId: data.roomChatId,
+                        content: data.content,
+                        images: images
+                    });
+                }
+            }
         });
 
         // Typing

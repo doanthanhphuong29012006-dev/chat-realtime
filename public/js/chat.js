@@ -14,6 +14,7 @@ const myId = document.querySelector("[my-id]").getAttribute("my-id");
 const myFullName = document.querySelector("[my-name]").getAttribute("my-name");
 
 socket.emit("CLIENT_JOIN_ROOM", roomChatId);
+socket.emit("CLIENT_JOIN_GLOBAL", myId);
 
 // CLIENT_SEND_MESSAGE
 var timeOut;
@@ -260,3 +261,27 @@ if (bodyChatPreviewImage) {
     const gallery = new Viewer(bodyChatPreviewImage);
 }
 // End Preview Full Image
+
+// SERVER_RETURN_SIDEBAR
+socket.on("SERVER_RETURN_SIDEBAR", (data) => {
+    const sidebarLink = document.querySelector(`.chat-sidebar a[href="/chat/${data.roomChatId}"]`);
+    if (sidebarLink) {
+        const lastMessageElement = sidebarLink.querySelector(".last-message");
+        const timeElement = sidebarLink.querySelector(".time");
+
+        if (lastMessageElement) {
+            if (data.content) {
+                lastMessageElement.innerHTML = data.content;
+            } else if (data.images && data.images.length > 0) {
+                lastMessageElement.innerHTML = "[Hình ảnh]";
+            }
+        }
+
+        if (timeElement) {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            timeElement.innerHTML = `${hours}:${minutes}`;
+        }
+    }
+});
