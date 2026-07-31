@@ -285,3 +285,21 @@ socket.on("SERVER_RETURN_SIDEBAR", (data) => {
         }
     }
 });
+
+// SERVER_RETURN_USER_STATUS_ONLINE
+socket.on("SERVER_RETURN_USER_STATUS_ONLINE", (data) => {
+    const statusDots = document.querySelectorAll(`.chat-sidebar .status-dot[user-id="${data.userId}"]`);
+    
+    if (statusDots.length > 0) {
+        statusDots.forEach(dot => {
+            if (data.status === "online") {
+                dot.classList.remove("offline");
+                dot.classList.add("online");
+            } else {
+                dot.classList.remove("online");
+                dot.classList.add("offline");
+            }
+        });
+    }
+});
+// End SERVER_RETURN_USER_STATUS_ONLINE

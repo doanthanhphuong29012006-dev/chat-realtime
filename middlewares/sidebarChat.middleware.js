@@ -16,6 +16,9 @@ module.exports.getSidebar = async (req, res, next) => {
             let roomName = "";
             let roomAvatar = "";
 
+            let partnerId = "";
+            let statusOnline = "";
+
             if (room.typeRoom === "friend") {
                 const partner = room.users.find(user => user.user_id.toString() !== userId);
                 if (partner) {
@@ -23,13 +26,15 @@ module.exports.getSidebar = async (req, res, next) => {
                         _id: partner.user_id,
                         deleted: false, 
                         status: "active"
-                    }).select("fullName avatar");
+                    }).select("fullName avatar statusOnline");
 
                     roomName = partnerInfo.fullName;
                     roomAvatar = partnerInfo.avatar;
+                    partnerId = partnerInfo.id;
+                    statusOnline = partnerInfo.statusOnline;
                 }
             } else {
-                roomName = room.title,
+                roomName = room.title;
                 roomAvatar = room.avatar
             }
 
@@ -60,7 +65,9 @@ module.exports.getSidebar = async (req, res, next) => {
                     roomName: roomName,
                     roomAvatar: roomAvatar,
                     lastMessage: messageContent,
-                    messageTime: messageTime
+                    messageTime: messageTime,
+                    partnerId: partnerId,
+                    statusOnline: statusOnline
                 });
             }
         }

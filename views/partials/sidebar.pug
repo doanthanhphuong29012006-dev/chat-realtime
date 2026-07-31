@@ -12,6 +12,11 @@ aside.chat-sidebar
                   src=item.roomAvatar
                   alt=item.roomName
               )
+              if item.partnerId
+                span.status-dot(
+                  user-id=item.partnerId
+                  class=(item.statusOnline === 'online' ? 'online' : 'offline')
+                )
             .contact-info
               h4.contact-name #{item.roomName}
               p.last-message #{item.lastMessage}
